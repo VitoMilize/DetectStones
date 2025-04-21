@@ -1,0 +1,12 @@
+*.ipynb
+*.pt
+*.jpg
+*.yaml
+/dataset
+*.avi
+/notebooks/runs
+/.idea
+/model
+*.mp4
+*.log
+test.py
