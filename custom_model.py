@@ -21,15 +21,12 @@ def draw_segmented_objects(image, result):
     thickness = 1
 
     h, w, _ = image.shape
-    total_area = h * w
 
-    # 🛡️ Проверка на пустые маски
     if result.masks is None or result.masks.data is None:
-        # Отображаем "0 объектов", если масок нет
         cv2.putText(annotated, "Objects: 0", (10, 20), font, font_scale, (0, 255, 255), thickness, cv2.LINE_AA)
         return annotated
 
-    count = 0  # счётчик объектов
+    count = 0
 
     for mask, cls_id in zip(result.masks.data, result.boxes.cls):
         cls_name = result.names[int(cls_id)]
@@ -51,8 +48,10 @@ def draw_segmented_objects(image, result):
     return annotated
 
 
-
 def setup_logger(log_file='train.log'):
+    """
+    Выдает логгер для работы
+    """
     os.makedirs(os.path.dirname(log_file), exist_ok=True)
 
     logger = logging.getLogger('yolo_trainer')
@@ -197,7 +196,7 @@ class CustomModel:
     def demo(self, input_path, weights_path):
         """
         Показывает в реальном времени сегментацию изображения, видео или всех файлов в папке.
-        :param input_path: Путь к изображению, видео или папке с ними
+        :param input_path: Путь к изображению или видео
         :param weights_path: Путь к весам модели
         """
         self.logger.info(f"👁️ Запуск демо-режима для: {input_path}")
