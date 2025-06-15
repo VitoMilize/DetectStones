@@ -10,3 +10,5 @@
 *.mp4
 *.log
 test.py
+.gitignore
+/assets
